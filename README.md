@@ -11,4 +11,4 @@ This includes the following but not limited to:
 1. installing jest
 2. installing babel presets and plugins
 3. enabling presets in .babelrc
-4.
+4. TDD - write a failing test, pass it, refactor it
