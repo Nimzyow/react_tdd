@@ -21,3 +21,29 @@ This includes the following but not limited to:
 9. run build
 
 Sounds simple, but I think anyone whos worked with webpack can feel my pain when I say that it's sometimes a real hellish experience. But this process is slowly unveiling the magic under the hood and helps me figure out how modern JavaScript build tools work together.
+
+## Installation
+
+1. In the root of the project type the following in your terminal:
+
+```
+$ npm install
+```
+
+That's it
+
+## Running the application
+
+1. In the root of the project type the following in your terminal:
+
+```
+$ npm build
+```
+
+This will build the main.js file in dist/
+
+Then open the index.html file in dist/ in your browser
+
+Thats all!
+
+Note: Instructions will change as this application grows
