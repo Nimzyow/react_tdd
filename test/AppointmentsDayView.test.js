@@ -14,16 +14,20 @@ describe("Appointment", () => {
 
   const render = (component) => ReactDOM.render(component, container);
 
+  const appointmentTable = () => {
+    return container.querySelector("#appointmentView > table");
+  };
+
   it("renders a table", () => {
     render(<Appointment customer={customer} />);
-    expect(container.querySelector("#appointmentView > table")).not.toBeNull();
+    expect(appointmentTable()).not.toBeNull();
   });
 
   it("renders the customer first name", () => {
     customer = { firstName: "Ashley" };
 
     render(<Appointment customer={customer} />);
-    expect(container.textContent).toMatch("Ashley");
+    expect(appointmentTable().textContent).toMatch("Ashley");
   });
   it("renders another customers first name", () => {
     customer = { firstName: "Jordan" };
