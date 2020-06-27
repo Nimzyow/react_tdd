@@ -67,6 +67,22 @@ describe("Appointment", () => {
     render(<Appointment customer={customer} stylist="Jo" />);
     expect(appointmentTable().textContent).toMatch("Jo");
   });
+  it("renders the salon service", () => {
+    render(<Appointment customer={customer} service="Cut" />);
+    expect(appointmentTable().textContent).toMatch("Cut");
+  });
+  it("renders another salon service", () => {
+    render(<Appointment customer={customer} service="Blow-dry" />);
+    expect(appointmentTable().textContent).toMatch("Blow-dry");
+  });
+  it("renders the appointment notes", () => {
+    render(<Appointment customer={customer} notes="abc" />);
+    expect(appointmentTable().textContent).toMatch("abc");
+  });
+  it("renders another appointment notes", () => {
+    render(<Appointment customer={customer} notes="def" />);
+    expect(appointmentTable().textContent).toMatch("def");
+  });
 });
 
 describe("AppointmentsDayView", () => {
