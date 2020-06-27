@@ -33,13 +33,13 @@ describe("Appointment", () => {
     customer = { firstName: "Jordan" };
 
     render(<Appointment customer={customer} />);
-    expect(container.textContent).toMatch("Jordan");
+    expect(appointmentTable().textContent).toMatch("Jordan");
   });
   it("renders the customers last name", () => {
     customer = { lastName: "Jones" };
 
     render(<Appointment customer={customer} />);
-    expect(container.textContent).toMatch("Jones");
+    expect(appointmentTable().textContent).toMatch("Jones");
   });
 });
 
