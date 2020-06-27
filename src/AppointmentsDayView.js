@@ -5,8 +5,15 @@ const appointmentTimeOfDay = (startsAt) => {
   return `${h}:${m}`;
 };
 
-export const Appointment = ({ customer, stylist, service, notes }) => (
+export const Appointment = ({
+  customer,
+  stylist,
+  service,
+  notes,
+  startsAt,
+}) => (
   <div id="appointmentView">
+    <h3>Today's appointment at {appointmentTimeOfDay(startsAt)}</h3>
     <table>
       <tbody>
         <tr>

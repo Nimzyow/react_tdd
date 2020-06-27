@@ -83,6 +83,16 @@ describe("Appointment", () => {
     render(<Appointment customer={customer} notes="def" />);
     expect(appointmentTable().textContent).toMatch("def");
   });
+  it("renders a heading with the time", () => {
+    const today = new Date();
+    const timeStamp = today.setHours(9, 0, 0);
+    render(<Appointment customer={customer} startsAt={timeStamp} />);
+
+    expect(container.querySelector("h3")).not.toBeNull();
+    expect(container.querySelector("h3").textContent).toEqual(
+      "Today's appointment at 09:00",
+    );
+  });
 });
 
 describe("AppointmentsDayView", () => {
