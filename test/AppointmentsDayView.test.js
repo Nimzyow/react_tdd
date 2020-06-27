@@ -146,4 +146,15 @@ describe("AppointmentsDayView", () => {
     ReactTestUtils.Simulate.click(button);
     expect(container.textContent).toMatch("Jordan");
   });
+  it("adds toggled class to button when selected", () => {
+    render(<AppointmentsDayView appointments={appointments} />);
+    const button = container.querySelectorAll("button")[1];
+    ReactTestUtils.Simulate.click(button);
+    expect(button.className).toMatch("toggled");
+  });
+  it("does not add toggled class if button is not selected", () => {
+    render(<AppointmentsDayView appointments={appointments} />);
+    const button = container.querySelectorAll("button")[1];
+    expect(button.className).not.toMatch("toggled");
+  });
 });
