@@ -41,6 +41,18 @@ describe("Appointment", () => {
     render(<Appointment customer={customer} />);
     expect(appointmentTable().textContent).toMatch("Jones");
   });
+  it("renders another customers last name", () => {
+    customer = { lastName: "Smith" };
+
+    render(<Appointment customer={customer} />);
+    expect(appointmentTable().textContent).toMatch("Smith");
+  });
+  it("renders the customers phone number", () => {
+    customer = { phoneNumber: "123456789" };
+
+    render(<Appointment customer={customer} />);
+    expect(appointmentTable().textContent).toMatch("123456789");
+  });
 });
 
 describe("AppointmentsDayView", () => {
