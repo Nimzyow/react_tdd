@@ -88,6 +88,20 @@ describe("CustomerForm", () => {
     itSubmitsExistingValue("firstName", "firstName");
     itSubmitsNewValue("firstName", "firstName");
   });
-  describe("last name field", () => {});
-  describe("phone number field", () => {});
+  describe("last name field", () => {
+    itRendersAsATextBox("lastName");
+    itIncludesTheExistingValue("lastName");
+    ItRendersALabel("lastName", "Last name");
+    itAssignsAnIdThatMatchesTheLabelId("lastName");
+    itSubmitsExistingValue("lastName", "lastName");
+    itSubmitsNewValue("lastName", "lastName");
+  });
+  describe("phone number field", () => {
+    itRendersAsATextBox("phoneNumber");
+    itIncludesTheExistingValue("phoneNumber");
+    ItRendersALabel("phoneNumber", "Phone number");
+    itAssignsAnIdThatMatchesTheLabelId("phoneNumber");
+    itSubmitsExistingValue("phoneNumber", "phoneNumber");
+    itSubmitsNewValue("phoneNumber", "phoneNumber");
+  });
 });
