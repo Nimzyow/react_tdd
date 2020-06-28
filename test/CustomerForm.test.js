@@ -41,6 +41,33 @@ describe("CustomerForm", () => {
       expect(field(fieldName).id).toEqual(fieldName);
     });
 
+  const itSubmitsExistingValue = (fieldName, value) =>
+    it("submits existing value", async () => {
+      expect.hasAssertions();
+      render(
+        <CustomerForm
+          {...{ [fieldName]: value }}
+          onSubmit={(props) => expect(props[fieldName]).toEqual(value)}
+        />,
+      );
+      await ReactTestUtils.Simulate.submit(form("customer"));
+    });
+
+  const itSubmitsNewValue = (fieldName, value) =>
+    it("saves new value when submitted", async () => {
+      expect.hasAssertions();
+      render(
+        <CustomerForm
+          {...{ [fieldName]: "existingValue" }}
+          onSubmit={(props) => expect(props[fieldName]).toEqual(value)}
+        />,
+      );
+      await ReactTestUtils.Simulate.change(field(fieldName), {
+        target: { value: value },
+      });
+      await ReactTestUtils.Simulate.submit(form("customer"));
+    });
+
   const labelFor = (formElement) =>
     container.querySelector(`label[for="${formElement}"]`);
 
@@ -58,29 +85,8 @@ describe("CustomerForm", () => {
     itIncludesTheExistingValue("firstName");
     ItRendersALabel("firstName", "First name");
     itAssignsAnIdThatMatchesTheLabelId("firstName");
-    it("saves existing value when submitted", async () => {
-      expect.hasAssertions();
-      render(
-        <CustomerForm
-          firstName="Ashley"
-          onSubmit={({ firstName }) => expect(firstName).toEqual("Ashley")}
-        />,
-      );
-      await ReactTestUtils.Simulate.submit(form("customer"));
-    });
-    it("saves new value when submitted", async () => {
-      expect.hasAssertions();
-      render(
-        <CustomerForm
-          firstName="Ashley"
-          onSubmit={({ firstName }) => expect(firstName).toEqual("Jamie")}
-        />,
-      );
-      await ReactTestUtils.Simulate.change(field("firstName"), {
-        target: { value: "Jamie" },
-      });
-      await ReactTestUtils.Simulate.submit(form("customer"));
-    });
+    itSubmitsExistingValue("firstName", "firstName");
+    itSubmitsNewValue("firstName", "firstName");
   });
   describe("last name field", () => {});
   describe("phone number field", () => {});
