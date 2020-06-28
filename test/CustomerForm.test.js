@@ -28,6 +28,13 @@ describe("CustomerForm", () => {
 
   const field = (name) => form("customer").elements[name];
 
+  const ItRendersALabel = (fieldName, labelName) =>
+    it("renders a label", () => {
+      render(<CustomerForm />);
+      expect(labelFor(fieldName)).not.toBeNull();
+      expect(labelFor(fieldName).textContent).toEqual(labelName);
+    });
+
   const labelFor = (formElement) =>
     container.querySelector(`label[for="${formElement}"]`);
 
@@ -43,12 +50,7 @@ describe("CustomerForm", () => {
   describe("first name field", () => {
     itRendersAsATextBox("firstName");
     itIncludesTheExistingValue("firstName");
-
-    it("renders a label", () => {
-      render(<CustomerForm />);
-      expect(labelFor("firstName")).not.toBeNull();
-      expect(labelFor("firstName").textContent).toEqual("First name");
-    });
+    ItRendersALabel("firstName", "First name");
     it("assigns an id that matches the label id", () => {
       render(<CustomerForm />);
       expect(field("firstName").id).toEqual("firstName");
