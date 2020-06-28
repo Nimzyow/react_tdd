@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { AppointmentsDayView } from "./Appointment";
-import { sampleAppointments } from "./sampleData";
+import { CustomerForm } from "./CustomerForm";
+
+const defaultData = {};
 
 ReactDOM.render(
-  <AppointmentsDayView appointments={sampleAppointments} />,
+  <CustomerForm {...defaultData} />,
   document.getElementById("root"),
 );

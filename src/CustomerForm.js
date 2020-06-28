@@ -27,7 +27,6 @@ export const CustomerForm = ({
         name="firstName"
         value={firstName}
         onChange={handleChange}
-        readOnly
       />
       <label htmlFor="lastName">Last name</label>
       <input
@@ -36,7 +35,6 @@ export const CustomerForm = ({
         name="lastName"
         value={lastName}
         onChange={handleChange}
-        readOnly
       />
       <label htmlFor="phoneNumber">Phone number</label>
       <input
@@ -45,7 +43,6 @@ export const CustomerForm = ({
         name="phoneNumber"
         value={phoneNumber}
         onChange={handleChange}
-        readOnly
       />
       <input type="submit" value="Add" />
     </form>
