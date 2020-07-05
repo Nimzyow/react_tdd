@@ -18,6 +18,10 @@ describe("AppointmentForm", () => {
 
   const field = (name) => form("appointment").elements[name];
 
+  const labelFor = (label) => {
+    return container.querySelector(`label[for="${label}"]`);
+  };
+
   it("renders a form", () => {
     render(<AppointmentForm />);
     expect(form("appointment")).not.toBeNull();
@@ -54,10 +58,8 @@ describe("AppointmentForm", () => {
     });
     it("renders a label", () => {
       render(<AppointmentForm />);
-      expect(container.querySelector('label[for="service"]')).not.toBeNull();
-      expect(
-        container.querySelector('label[for="service"]').textContent,
-      ).toEqual("Salon service");
+      expect(labelFor("service")).not.toBeNull();
+      expect(labelFor("service").textContent).toEqual("Salon service");
     });
   });
 });
