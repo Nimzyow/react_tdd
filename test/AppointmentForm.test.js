@@ -52,5 +52,12 @@ describe("AppointmentForm", () => {
       const option = findOption(field("service"), "Blow-Dry");
       expect(option.selected).toBeTruthy();
     });
+    it("renders a label", () => {
+      render(<AppointmentForm />);
+      expect(container.querySelector('label[for="service"]')).not.toBeNull();
+      expect(
+        container.querySelector('label[for="service"]').textContent,
+      ).toEqual("Salon service");
+    });
   });
 });
