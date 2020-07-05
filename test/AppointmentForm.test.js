@@ -1,9 +1,13 @@
 import React from "react";
 import { createContainer } from "./domManipulators";
 import { AppointmentForm } from "../src/AppointmentForm";
-import { Appointment } from "../src/AppointmentsDayView";
 
 describe("AppointmentForm", () => {
+  const findOption = (dropdownNode, textContent) => {
+    const options = Array.from(dropdownNode.childNodes);
+    return options.find((option) => option.textContent === textContent);
+  };
+
   let render, container;
 
   beforeEach(() => {
@@ -30,6 +34,23 @@ describe("AppointmentForm", () => {
       const firstNode = field("service").childNodes[0];
       expect(firstNode.value).toEqual("");
       expect(firstNode.selected).toBeTruthy();
+    });
+    it("lists all salon services", () => {
+      const selectableServices = ["Cut", "Blow-dry"];
+      render(<AppointmentForm selectableServices={selectableServices} />);
+      const optionNodes = Array.from(field("service").childNodes);
+      const renderedServices = optionNodes.map((node) => node.textContent);
+      expect(renderedServices).toEqual(
+        expect.arrayContaining(selectableServices),
+      );
+    });
+    it("pre-selects the existing value", () => {
+      const services = ["Cut", "Blow-Dry"];
+      render(
+        <AppointmentForm selectableServices={services} service="Blow-Dry" />,
+      );
+      const option = findOption(field("service"), "Blow-Dry");
+      expect(option.selected).toBeTruthy();
     });
   });
 });
