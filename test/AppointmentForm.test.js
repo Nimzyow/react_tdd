@@ -1,6 +1,7 @@
 import React from "react";
 import { createContainer } from "./domManipulators";
 import { AppointmentForm } from "../src/AppointmentForm";
+import ReactTestUtils from "react-dom/test-utils";
 
 describe("AppointmentForm", () => {
   const findOption = (dropdownNode, textContent) => {
@@ -64,6 +65,29 @@ describe("AppointmentForm", () => {
     it("assigns an id that matches the label id", () => {
       render(<AppointmentForm />);
       expect(field("service").id).toEqual("service");
+    });
+    it("saves existing value when submitted", async () => {
+      expect.hasAssertions();
+      render(
+        <AppointmentForm
+          service="Blow-dry"
+          onSubmit={({ service }) => expect(service).toEqual("Blow-dry")}
+        />,
+      );
+      await ReactTestUtils.Simulate.submit(form("appointment"));
+    });
+    it("saves new value when submitted", async () => {
+      expect.hasAssertions();
+      render(
+        <AppointmentForm
+          service="Blow-dry"
+          onSubmit={({ service }) => expect(service).toEqual("Cut")}
+        />,
+      );
+      await ReactTestUtils.Simulate.change(field("service"), {
+        target: { value: "Cut", name: "service" },
+      });
+      await ReactTestUtils.Simulate.submit(form("appointment"));
     });
   });
 });
