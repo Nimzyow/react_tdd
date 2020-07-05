@@ -61,5 +61,9 @@ describe("AppointmentForm", () => {
       expect(labelFor("service")).not.toBeNull();
       expect(labelFor("service").textContent).toEqual("Salon service");
     });
+    it("assigns an id that matches the label id", () => {
+      render(<AppointmentForm />);
+      expect(field("service").id).toEqual("service");
+    });
   });
 });
