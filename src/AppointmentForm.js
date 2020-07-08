@@ -4,6 +4,27 @@ const dailyTimeSlots = (salonOpensAt, salonClosesAt) => {
   const totalSlots = (salonClosesAt - salonOpensAt) * 2;
   const startTime = new Date().setHours(salonOpensAt, 0, 0);
   const increment = 30 * 60 * 1000;
+  console.log("total slots", totalSlots);
+  // Array(totalSlots) OUTPUT: array with 4 empty items
+  // Array(totalSlots).fill([startTime]) OUTPUT: array with 4 arrays all with the startTime.
+  //OUTPUT of line above:
+  /* 
+  array total slots [
+        [ 1594195200439 ],
+        [ 1594195200439 ],
+        [ 1594195200439 ],
+        [ 1594195200439 ]
+      ]
+  */
+  // Array(totalSlots).fill([startTime]).reduce((acc, _, i) => acc.concat([startTime + i * increment])), OUTPUT: the _ in the arguemnt basically means to ignore the argument in that position.
+  // we get the first item in array and insert [startTime + i * increment]
+  // reduce will return the single value that results from teh deduction. so it wont return [startTime + i * increment] , it will return startTime + i * increment
+  console.log(
+    "array total slots",
+    Array(totalSlots)
+      .fill([startTime])
+      .reduce((acc, _, i) => acc.concat([startTime + i * increment])),
+  );
   return Array(totalSlots)
     .fill([startTime])
     .reduce((acc, _, i) => acc.concat([startTime + i * increment]));
