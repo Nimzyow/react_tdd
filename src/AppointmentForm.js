@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 
+const weeklyDateValues = (startDate) => {
+  const midnight = new Date(startDate).setHours(0, 0, 0, 0);
+  const increment = 24 * 60 * 60 * 1000;
+  return Array(7)
+    .fill([midnight])
+    .reduce((acc, _, i) => acc.concat([midnight + i * increment]));
+};
+
 const dailyTimeSlots = (salonOpensAt, salonClosesAt) => {
   const totalSlots = (salonClosesAt - salonOpensAt) * 2;
   const startTime = new Date().setHours(salonOpensAt, 0, 0);
@@ -30,6 +38,11 @@ const dailyTimeSlots = (salonOpensAt, salonClosesAt) => {
     .reduce((acc, _, i) => acc.concat([startTime + i * increment]));
 };
 
+const toShortDate = (timeStamp) => {
+  const [day, , dayOfMonth] = new Date(timeStamp).toDateString().split(" ");
+  return `${day} ${dayOfMonth}`;
+};
+
 const toTimeValue = (timeStamp) =>
   new Date(timeStamp).toTimeString().substring(0, 5);
 //the above toTimeValue accepts a timeStap like 1594800000013
@@ -38,8 +51,9 @@ const toTimeValue = (timeStamp) =>
 //it then converts that to a string with .toTimeString()
 //it then returns only the first five characters of the string with .subString(0, 5)
 
-export const TimeSlotTable = ({ salonOpensAt, salonClosesAt }) => {
+export const TimeSlotTable = ({ salonOpensAt, salonClosesAt, today }) => {
   //timeSlots is an array of time slots
+  const dates = weeklyDateValues(today);
   const timeSlots = dailyTimeSlots(salonOpensAt, salonClosesAt);
   //console.log(timeSlots);
 
@@ -48,6 +62,9 @@ export const TimeSlotTable = ({ salonOpensAt, salonClosesAt }) => {
       <thead>
         <tr>
           <th />
+          {dates.map((d) => (
+            <th key={d}>{toShortDate(d)}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
@@ -67,6 +84,7 @@ export const AppointmentForm = ({
   onSubmit,
   salonOpensAt,
   salonClosesAt,
+  today,
 }) => {
   const [appointment, setAppointment] = useState({ service });
 
@@ -91,12 +109,14 @@ export const AppointmentForm = ({
       <TimeSlotTable
         salonOpensAt={salonOpensAt}
         salonClosesAt={salonClosesAt}
+        today={today}
       />
     </form>
   );
 };
 
 AppointmentForm.defaultProps = {
+  today: new Date(),
   salonOpensAt: 9,
   salonClosesAt: 19,
   selectableServices: [
